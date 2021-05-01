@@ -1,0 +1,18 @@
+[{
+        "houseId": 1,
+        "city": "珠海",
+        "price": 160,
+        "label": "整套公寓，1室1卫1床，可住3人",
+        "houseName": "【路客】Hos·东晓南地铁站店｜消毒｜免费停车｜石溪双地铁｜精致大床｜干湿分区｜24h前台",
+        "imgUrl": "https://z1.muscache.cn/im/pictures/prohost-api/Hosting-49133672/original/f7b599a8-74b6-420e-87b3-9b2fd5e27026.jpeg?aki_policy=large"
+    },
+    {
+        "houseId": 2,
+        "city": "广州",
+        "price": 210,
+        "label": "整套公寓，1室1卫1床，可住4人",
+        "houseName": "「藏品·A」可长租/天河区/天河智慧城站/万科广场/可做饭/巴厘岛度假风大床美宿",
+        "imgUrl": "https://z1.muscache.cn/im/pictures/ca334c51-3113-4543-b9b4-b2d1031f6098.jpg?aki_policy=large"
+    }
+
+]

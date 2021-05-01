@@ -6,7 +6,9 @@ import './assets/styles/reset.css'
 import './assets/styles/border.css'
 import './assets/styles/iconfont.css'
 import fastClick from 'fastclick'
-
+import VueAwesomeSwiper from 'vue-awesome-swiper';
+import 'swiper/swiper-bundle.css'
+Vue.use(VueAwesomeSwiper)
 require('../public/mock')
 var axios = require('axios')
 //axios.defaults.baseURL = 'https://localhost:8888'

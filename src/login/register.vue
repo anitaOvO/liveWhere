@@ -1,37 +1,31 @@
 <template>
-    <div class="login"> 
-        <div class="header-left">
+    <div class="register"> 
+        <div class="header-left" @click="back_tologin">
             <div class="iconfont back-icon">&#xe685;</div>
         </div>
         <div class="header-top">
-            使用账号密码登录
+            注册
         </div>
         <div class="header-below">
-            使用已注册手机号或邮箱登录
+            使用手机号或用户名注册
         </div>
-        <div><!--class="background"-->
+        <div>
             <div class="container">
                 <div class="name">
                     <label>用户名：
                         <br />
-                    </label><input type="text" name="username" placeholder="请输入用户名" v-model.trim="loginInfo.userName">
+                    </label><input type="text" name="username" placeholder="请输入用户名" v-model.trim="registerInfo.userName">
                 </div>
                 <div class="pwd">
                     <label>密码：
                     <br />
-                    </label>
-                    <div class = "dinput">
-                      <input type="password" name="passwd" placeholder="请输入密码" v-model.trim="loginInfo.password">
-                      <i class="iconfont password-show" @click="pwd_show">&#xe806;</i> 
-                    </div>
-                     
-                </div>
-                <div class="Toregister">
-                        <p class="forget">忘记密码?</p>
-                        <p class="register" @click="register">还没有账号,去注册?</p>
+                    </label><!-- <div class="password-show" @click="pwd_show">❤</div> -->
+                    <input type="password" name="passwd" v-if="show" placeholder="请输入密码" v-model.trim="registerInfo.password">
+                    <input type="text" name="passwd" v-else placeholder="请输入密码" v-model.trim="registerInfo.password">
+                    <i class="iconfont password-show" @click="pwd_show">&#xe806;</i>  
                 </div>
             </div> 
-            <button type="submit" @click="handleLogin">登录</button>
+            <button type="submit" @click="handleRegister">注册</button>
         </div>
         <div class = "content">
             <p>注册/登录即代表您年满18岁，已认真阅读并确认接受在哪儿《服务条款》、《隐私政策》
@@ -44,10 +38,10 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Login",
+  name: "Register",
   data() {
     return {
-      loginInfo: { userName: "", password: "" },
+      registerInfo: { userName: "", password: "" },
       responseResult: [],
       show: true//初始为隐藏状态
     };
@@ -56,24 +50,25 @@ export default {
     pwd_show:function(){//红心按钮定义方法
             this.show = !this.show
         },
-    register:function(){
-      this.$router.replace({ path: "/register" });
+    back_tologin:function(){
+            this.$router.replace({ path: "/Login" });
     },
 
-    handleLogin: function () {
-      alert(this.loginInfo.userName);
-
-      axios // /api
-        .post("/api/login", {
-           userName: this.loginInfo.userName,
-           password: this.loginInfo.password,
+    handleRegister: function () {
+        axios // /api
+        .post("/api/register",{
+            userName:this.registerInfo.userName,
+            password:this.registerInfo.password
         })
         .then((successResponse) => {
           this.responseResult = JSON.stringify(successResponse.data);
           if (successResponse.data.code === 1) {
-            this.$router.replace({ path: "/" });
-          } else {
-            alert("密码错误");
+              alert("注册成功");
+                this.$router.replace({ path: "/Login" });
+          } else if(successResponse.data.code === 0){
+            alert("用户名已存在");
+          }else{
+              alert("注册失败");
           }
         })
         .catch((failResponse) => {
@@ -85,10 +80,10 @@ export default {
 </script>
 
 <style scoped>
-.login {
+.register {
   max-width: 540px;
   min-width: 320px;
-  /* background:yellowgreen; */
+  
   margin: 0 auto;
   height: 650px;
 }
@@ -119,39 +114,46 @@ export default {
     margin-top:1.5rem;
     padding:0.4rem
 }
-input{
+/* input{ 
+    margin-top: 0.5rem;
+    border-style: none none solid none;
+    border-bottom-color: rgba(232, 228, 240, 0.856);
+    width: 6rem;
+    font-size: 0.3rem;
+} */
+.container .name{
+    text-align: left;
+    margin-top:2rem;
+}
+.container .name input{
     margin-top: 0.5rem;
     border-style: none none solid none;
     border-bottom-color: rgba(232, 228, 240, 0.856);
     width: 6rem;
     font-size: 0.3rem;
 }
-.container .name{
-    text-align: left;
-    margin-top:1.5rem;
-}
 .container .pwd{
     position:relative;
     text-align: left;
     margin-top: 1rem;
-    margin-bottom:5%
+}
+.container .pwd input{
+    /* position:fixed; */
+    margin-top: 0.5rem;
+    border-style: none none solid none;
+    border-bottom-color: rgba(232, 228, 240, 0.856);
+    width: 100%;
+    font-size: 0.3rem;
 }
 .container .pwd .password-show{
     position:absolute;
+    text-align: right;
     margin-top:.5rem;
-    margin-left:.2rem;
+    margin-left:.1rem;
     font-size:.4rem;
 }
-.container .Toregister .forget{
-    float:left;
-    color:rgb(16, 231, 167);
-}
-.container .Toregister .register{
-    float:right;
-    color:rgb(16, 231, 167);
-}
 button{
-    width: 6rem;
+    width: 85%;
     height: .8rem;
     margin-top:6rem;
     margin-left:.5rem;
@@ -162,12 +164,12 @@ button{
     border-style: none;
 }
 .content{
- 
+    display:flex;
     font-size: 0.25rem;
-    padding:.5rem;
+    padding:.1rem;
     text-align: center;
     line-height:0.35rem; 
     color:rgb(127, 127,127);
-    margin:1.8rem 0.2rem;
+    margin:20% 0.2rem;
 }
 </style>

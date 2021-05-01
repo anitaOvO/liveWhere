@@ -1,0 +1,55 @@
+{
+    "ret": true,
+    "data": {
+        "citylist": [{
+                "id": "0001",
+                "city": "珠海",
+                "avg": 160,
+                "imgUrl": "https://z1.muscache.cn/im/pictures/e90e5b26-25b7-4ed0-987b-cec04014cf99.jpg?aki_policy=large"
+            },
+            {
+                "id": "0002",
+                "city": "广州",
+                "avg": 200,
+                "imgUrl": "https://z1.muscache.cn/im/pictures/e7b2259c-269e-4057-8a98-17cd421a80de.jpg?aki_policy=large"
+            },
+            {
+                "id": "0003",
+                "city": "深圳",
+                "avg": 260,
+                "imgUrl": "https://z1.muscache.cn/im/pictures/a8a25fe3-3fa1-44bf-8f68-04f465993f95.jpg?aki_policy=large"
+            },
+            {
+                "id": "0004",
+                "city": "佛山",
+                "avg": 120,
+                "imgUrl": "https://z1.muscache.cn/im/pictures/263d51d6-86a4-4b6c-808e-949fdbbc0015.jpg?aki_policy=large"
+            },
+            {
+                "id": "0005",
+                "city": "厦门",
+                "avg": 120,
+                "imgUrl": "https://z1.muscache.cn/im/pictures/ac4cf81c-fd48-4def-9ad5-1b49ade1850a.jpg?aki_policy=large"
+            },
+            {
+                "id": "0006",
+                "city": "重庆",
+                "avg": 140,
+                "imgUrl": "https://z1.muscache.cn/im/pictures/b6f7ec5d-cc44-4462-be56-a86cc37f3f9b.jpg?aki_policy=large"
+
+            },
+            {
+                "id": "0007",
+                "city": "成都",
+                "avg": 210,
+                "imgUrl": "https://z1.muscache.cn/im/pictures/0aac97b6-429b-4be5-bfd8-68b0544411b3.jpg?aki_policy=large"
+            },
+            {
+                "id": "0008",
+                "city": "丽江",
+                "avg": 130,
+                "imgUrl": "https://z1.muscache.cn/im/pictures/99599167-9494-4f8f-93e3-8d9c18a757e3.jpg?aki_policy=large"
+            }
+        ]
+    }
+}
