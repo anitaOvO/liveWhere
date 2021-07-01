@@ -25,12 +25,18 @@ export default {
   name: "HomeRecommand",
   props: {
     citylist: Array,
-    city: "",
   },
   data() {
     return {
-      city: this.citylist,
+      city: this.$route.params.city,
     };
+  },
+  methods: {
+    selectCity() {
+      alert(this.city);
+      /* this.city = res;
+      this.$store.commit("changeCity", this.city); */
+    },
   },
 };
 </script>

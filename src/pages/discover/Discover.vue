@@ -1,15 +1,22 @@
 <template>
   <div class="Discover">
-    搜索页面
+    <search></search>
+    <discount></discount>
+    <div class="foot"></div>
     <home-footer></home-footer>
   </div>
 </template>
 <script>
 import HomeFooter from "../home/components/Footer";
+import Search from "../discover/components/Search.vue";
+import Discount from "./components/Discount.vue";
+import LandMark from "./components/landMark.vue";
 export default {
   name: "Discover",
   components: {
     HomeFooter,
+    Search,
+    Discount,
   },
 };
 </script>
@@ -21,9 +28,11 @@ export default {
   font: normal 14px/1.5 Tahoma, "Lucida Grande", Verdana, "Microsoft Yahei",
     STXihei, hei;
   color: #000;
-  background-color: gray;
+  background-color: #fff;
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
-  height: 2000px;
+}
+.foot {
+  height: 100px;
 }
 </style>

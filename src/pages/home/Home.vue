@@ -2,6 +2,7 @@
   <div class="home">
     <home-Swiper></home-Swiper>
     <home-Recommand :citylist="citylist"></home-Recommand>
+    <landmark></landmark>
     <home-footer></home-footer>
   </div>
 </template>

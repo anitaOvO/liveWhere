@@ -2,38 +2,25 @@
   <div class="list">
     <nav>
       <form action="">
-        <input type="search" placeholder="请输入城市名" />
+        <input
+          type="search"
+          placeholder="请输入关键字"
+          v-model="searchInput"
+          @input="search"
+        />
       </form>
       <div class="icon">
         <a href="#" class="iconfont return" @click="handleOfReturn">
           &#xe61e;
         </a>
-        <span>{{ this.$route.params.city }}</span>
+        <span @click="selectCity">{{ this.city }}</span>
       </div>
     </nav>
 
-    <h2>300多处住宿</h2>
-    <router-link
-      tag="div"
-      class="container"
-      v-for="item of detaillist"
-      :key="item.houseId"
-      :to="'/detail/' + item.houseId"
-    >
-      <div class="show">
-        <img
-          src="https://z1.muscache.cn/im/pictures/prohost-api/Hosting-49133672/original/f7b599a8-74b6-420e-87b3-9b2fd5e27026.jpeg?aki_policy=large"
-        />
-      </div>
-      <div class="detail">
-        <p>{{ item.label }}</p>
-        <h2>{{ item.houseName }}</h2>
-        <div class="price">
-          <span>￥{{ item.price }}</span>
-          <span>每晚</span>
-        </div>
-      </div>
-    </router-link>
+    <h2>共{{ detailList.length }}处住宿</h2>
+    <div class="show">
+      <show-list :detailList="detailList"></show-list>
+    </div>
     <div class="bottom">
       <img src="../../../assets/s1.png" alt="" />
       到底啦~
@@ -42,14 +29,20 @@
 </template>
 <script>
 import axios from "axios";
+import ShowList from "../../../components/show-list.vue";
 export default {
   name: "list",
+  components: {
+    ShowList,
+  },
   data() {
     return {
-      detaillist: [],
+      detailList: [],
       city: this.$route.params.city,
+      searchInput: "",
     };
   },
+  computed: {},
   methods: {
     getDetailList() {
       axios // /api
@@ -58,8 +51,8 @@ export default {
         })
         .then((successResponse) => {
           //this.responseResult = JSON.stringify(successResponse.data);
-          this.detaillist = successResponse.data;
-          console.log(this.detaillist);
+          this.detailList = successResponse.data;
+          console.log(this.detailList);
         })
         .catch((failResponse) => {
           alert("what the fuck???");
@@ -67,6 +60,24 @@ export default {
     },
     handleOfReturn: function () {
       this.$router.replace("/");
+    },
+    selectCity() {
+      this.$router.push("/City");
+    },
+    search() {
+      let searchInput = this.searchInput;
+      console.log(searchInput);
+      if (searchInput !== "") {
+        axios
+          .post("/api/searchName", {
+            searchInput,
+            city: this.city,
+          })
+          .then((res) => {
+            this.detailList = res.data;
+            console.log(this.detailList);
+          });
+      }
     },
   },
   mounted: function () {
@@ -98,8 +109,10 @@ nav {
   height: 60px;
   max-width: 540px;
   width: 100%;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   padding: 10px;
+  background-color: rgba(247, 247, 247, 0.842);
+  z-index: 9;
 }
 nav input {
   height: 40px;
@@ -109,10 +122,13 @@ nav input {
   font-size: 14px;
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 }
+
 .container {
-  margin: 0 10px 10px;
   background-color: white;
   border-radius: 8px;
+}
+.show {
+  padding: 0 10px;
 }
 .icon {
   position: absolute;
@@ -129,30 +145,6 @@ nav input {
   font-weight: 800;
   margin-right: 11px;
   vertical-align: middle;
-}
-.show {
-  overflow: hidden;
-  border-radius: 8px;
-  margin-bottom: 8px;
-}
-.show img {
-  width: 100%;
-}
-.detail {
-  background-color: #fff;
-  border-radius: 8px;
-  color: rgb(57, 87, 106);
-}
-.detail h2 {
-  margin: 5px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: rgb(72, 72, 72);
-}
-.price span:nth-child(1) {
-  font-weight: 800;
-  margin-right: 8px;
 }
 .bottom {
   width: 50%;

@@ -20,8 +20,8 @@
     </li>
     <li>
       <a href="#" @click="handlemail">
-        <span class="iconfont footer-icon">&#xe9e2;</span>
-        <span>邮箱</span>
+        <span class="iconfont footer-icon">&#xe6f5;</span>
+        <span>消息</span>
       </a>
     </li>
     <li>
@@ -35,6 +35,11 @@
 <script>
 export default {
   name: "HomeFooter",
+  data() {
+    return {
+      flag: this.$store.state.flag,
+    };
+  },
   methods: {
     handlesearch: function () {
       this.$router.replace({ path: "/Discover" });
@@ -49,7 +54,9 @@ export default {
       this.$router.replace({ path: "/Mail" });
     },
     handlemine: function () {
-      this.$router.replace({ path: "/Mine" });
+      this.flag === 0
+        ? this.$router.replace({ path: "/Mine/HostOrder" })
+        : this.$router.replace({ path: "/Mine/UserOrder" });
     },
   },
 };
@@ -58,13 +65,14 @@ export default {
 .footer-nav {
   display: flex;
   position: fixed;
-  bottom: 0;
+  bottom: -1px;
   min-width: 320px;
   max-width: 540px;
-  height: 66px;
+  height: 67px;
   width: 100%;
   border-top: 1px solid #dbdbdb;
   background-color: #fff;
+  z-index: 9;
 }
 .footer-nav li {
   flex: 1;
